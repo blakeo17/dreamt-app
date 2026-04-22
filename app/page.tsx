@@ -82,16 +82,6 @@ function WideEmailForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Rate limit: prevent submissions within 60s of each other
-    const now = Date.now();
-    const prev = localStorage.getItem("loops-form-timestamp");
-    if (prev && Number(prev) + 60000 > now) {
-      setErrorMsg("Too many signups, please try again in a little while");
-      setStatus("error");
-      return;
-    }
-    localStorage.setItem("loops-form-timestamp", String(now));
-
     setStatus("loading");
 
     try {
@@ -110,10 +100,7 @@ function WideEmailForm({
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "";
-      if (msg === "Failed to fetch") {
-        setErrorMsg("Too many signups, please try again in a little while");
-        localStorage.setItem("loops-form-timestamp", "");
-      } else if (msg) {
+      if (msg) {
         setErrorMsg(msg);
       }
       setStatus("error");
