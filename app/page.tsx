@@ -63,7 +63,7 @@ function PhoneMockup({ label }: { label: string }) {
   );
 }
 
-const LOOPS_FORM_URL = "https://app.loops.so/api/newsletter-form/cmn85yiux0kp10i0qxkxjaca3";
+const LOOPS_FORM_URL = "https://app.loops.so/api/newsletter-form/cmo9lgz983qfn0i0i36u1egut";
 
 // Wide email form — used in hero and final CTA
 function WideEmailForm({
