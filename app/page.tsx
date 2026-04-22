@@ -63,7 +63,8 @@ function PhoneMockup({ label }: { label: string }) {
   );
 }
 
-const LOOPS_FORM_URL = "https://app.loops.so/api/newsletter-form/cmo9lgz983qfn0i0i36u1egut";
+const LOOPS_FORM_URL = "https://app.loops.so/api/newsletter-form/cmn85yiux0kp10i0qxkxjaca3";
+const LOOPS_MAILING_LIST = "cmo9lgz983qfn0i0i36u1egut";
 
 // Wide email form — used in hero and final CTA
 function WideEmailForm({
@@ -88,7 +89,7 @@ function WideEmailForm({
       const res = await fetch(LOOPS_FORM_URL, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `userGroup=&mailingLists=&email=${encodeURIComponent(email)}`,
+        body: `userGroup=&mailingLists=${LOOPS_MAILING_LIST}&email=${encodeURIComponent(email)}`,
       });
 
       if (res.ok) {
