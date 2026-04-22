@@ -18,7 +18,38 @@ const sans = "var(--font-geist-sans, system-ui, sans-serif)";
 
 function LeafLogo() {
   return (
-    <img src="/logo.png" alt="Dreamt" style={{ height: "44px", width: "auto" }} />
+    <div className="flex items-center gap-3">
+      <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="logo-clip">
+            <circle cx="50" cy="50" r="50" />
+          </clipPath>
+        </defs>
+        <circle cx="50" cy="50" r="50" fill="#2D6A4F" />
+        <g clipPath="url(#logo-clip)">
+          {/* Golden sun */}
+          <circle cx="50" cy="36" r="10" fill="#E8B84B" />
+          {/* Sun rays */}
+          <line x1="50" y1="20" x2="50" y2="15" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="62" y1="24" x2="65" y2="19" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="70" y1="36" x2="75" y2="36" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="38" y1="24" x2="35" y2="19" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="30" y1="36" x2="25" y2="36" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="57" y1="21" x2="61" y2="16" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="43" y1="21" x2="39" y2="16" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          {/* Horizon line */}
+          <line x1="0" y1="46" x2="100" y2="46" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" />
+          {/* Winding path */}
+          <path
+            d="M50 46 C44 54 30 57 34 68 C38 79 60 77 55 90 C52 99 42 106 38 114"
+            stroke="white" strokeWidth="11" strokeLinecap="round" fill="none"
+          />
+        </g>
+      </svg>
+      <span style={{ color: C.forest, fontFamily: serif }} className="text-2xl font-semibold">
+        Dreamt
+      </span>
+    </div>
   );
 }
 
