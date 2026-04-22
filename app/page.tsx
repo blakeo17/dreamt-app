@@ -18,31 +18,7 @@ const sans = "var(--font-geist-sans, system-ui, sans-serif)";
 
 function LeafLogo() {
   return (
-    <div className="flex items-center gap-2.5">
-      <div
-        style={{ backgroundColor: C.forest }}
-        className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2C19 7 19 17 12 22C5 17 5 7 12 2Z" fill="white" />
-          <path
-            d="M12 22V9"
-            stroke="rgba(255,255,255,0.35)"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M12 14C14.5 11.5 17 10 19 9"
-            stroke="rgba(255,255,255,0.3)"
-            strokeWidth="1"
-            strokeLinecap="round"
-          />
-        </svg>
-      </div>
-      <span style={{ color: C.forest, fontFamily: serif }} className="text-2xl font-semibold tracking-wide">
-        Dreamt
-      </span>
-    </div>
+    <img src="/logo.png" alt="Dreamt" style={{ height: "44px", width: "auto" }} />
   );
 }
 
