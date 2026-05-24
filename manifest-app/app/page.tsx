@@ -18,28 +18,35 @@ const sans = "var(--font-geist-sans, system-ui, sans-serif)";
 
 function LeafLogo() {
   return (
-    <div className="flex items-center gap-2.5">
-      <div
-        style={{ backgroundColor: C.forest }}
-        className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2C19 7 19 17 12 22C5 17 5 7 12 2Z" fill="white" />
+    <div className="flex items-center gap-3">
+      <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="logo-clip">
+            <circle cx="50" cy="50" r="50" />
+          </clipPath>
+        </defs>
+        <circle cx="50" cy="50" r="50" fill="#2D6A4F" />
+        <g clipPath="url(#logo-clip)">
+          {/* Golden sun */}
+          <circle cx="50" cy="36" r="10" fill="#E8B84B" />
+          {/* Sun rays */}
+          <line x1="50" y1="20" x2="50" y2="15" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="62" y1="24" x2="65" y2="19" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="70" y1="36" x2="75" y2="36" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="38" y1="24" x2="35" y2="19" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="30" y1="36" x2="25" y2="36" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="57" y1="21" x2="61" y2="16" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="43" y1="21" x2="39" y2="16" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          {/* Horizon line */}
+          <line x1="0" y1="46" x2="100" y2="46" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" />
+          {/* Winding path */}
           <path
-            d="M12 22V9"
-            stroke="rgba(255,255,255,0.35)"
-            strokeWidth="1.5"
-            strokeLinecap="round"
+            d="M50 46 C44 54 30 57 34 68 C38 79 60 77 55 90 C52 99 42 106 38 114"
+            stroke="white" strokeWidth="11" strokeLinecap="round" fill="none"
           />
-          <path
-            d="M12 14C14.5 11.5 17 10 19 9"
-            stroke="rgba(255,255,255,0.3)"
-            strokeWidth="1"
-            strokeLinecap="round"
-          />
-        </svg>
-      </div>
-      <span style={{ color: C.forest, fontFamily: serif }} className="text-2xl font-semibold tracking-wide">
+        </g>
+      </svg>
+      <span style={{ color: C.forest, fontFamily: serif }} className="text-2xl font-semibold">
         Dreamt
       </span>
     </div>
@@ -64,6 +71,7 @@ function PhoneMockup({ label }: { label: string }) {
 }
 
 const LOOPS_FORM_URL = "https://app.loops.so/api/newsletter-form/cmn85yiux0kp10i0qxkxjaca3";
+const LOOPS_MAILING_LIST = "cmo9lgz983qfn0i0i36u1egut";
 
 // Wide email form — used in hero and final CTA
 function WideEmailForm({
@@ -82,23 +90,13 @@ function WideEmailForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Rate limit: prevent submissions within 60s of each other
-    const now = Date.now();
-    const prev = localStorage.getItem("loops-form-timestamp");
-    if (prev && Number(prev) + 60000 > now) {
-      setErrorMsg("Too many signups, please try again in a little while");
-      setStatus("error");
-      return;
-    }
-    localStorage.setItem("loops-form-timestamp", String(now));
-
     setStatus("loading");
 
     try {
       const res = await fetch(LOOPS_FORM_URL, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `userGroup=&mailingLists=&email=${encodeURIComponent(email)}`,
+        body: `userGroup=&mailingLists=${LOOPS_MAILING_LIST}&email=${encodeURIComponent(email)}`,
       });
 
       if (res.ok) {
@@ -110,10 +108,7 @@ function WideEmailForm({
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "";
-      if (msg === "Failed to fetch") {
-        setErrorMsg("Too many signups, please try again in a little while");
-        localStorage.setItem("loops-form-timestamp", "");
-      } else if (msg) {
+      if (msg) {
         setErrorMsg(msg);
       }
       setStatus("error");
@@ -218,40 +213,6 @@ function EmailForm({ buttonText }: { buttonText: string }) {
   );
 }
 
-function AvatarCluster() {
-  const avatars = [
-    { initial: "A", bg: "#1E5940" },
-    { initial: "M", bg: "#7A5E2A" },
-    { initial: "S", bg: "#4E8B5F" },
-    { initial: "J", bg: "#2D4F4F" },
-  ];
-  return (
-    <div className="flex items-center justify-center gap-3">
-      <div className="flex">
-        {avatars.map((a, i) => (
-          <div
-            key={i}
-            style={{
-              backgroundColor: a.bg,
-              color: "white",
-              marginLeft: i === 0 ? 0 : "-10px",
-              zIndex: 10 - i,
-              border: "2.5px solid white",
-              position: "relative",
-              fontFamily: sans,
-            }}
-            className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold"
-          >
-            {a.initial}
-          </div>
-        ))}
-      </div>
-      <p style={{ color: C.dark, fontFamily: sans }} className="text-sm">
-        Joining <strong>1,000+</strong> people already on the waitlist
-      </p>
-    </div>
-  );
-}
 
 export default function Home() {
   return (
@@ -387,10 +348,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Social proof */}
-        <div className="relative z-10 flex justify-center pt-10 pb-16">
-          <AvatarCluster />
-        </div>
       </section>
 
       {/* ──────────────────────────────────────────
@@ -715,198 +672,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ──────────────────────────────────────────
-          SECTION 4 — SOCIAL PROOF
-      ────────────────────────────────────────── */}
-      <section
-        style={{ backgroundColor: "#ffffff" }}
-        className="relative py-24 px-6 overflow-hidden"
-      >
-        {/* Background blob */}
-        <div style={{
-          position: "absolute", top: "-60px", left: "-140px",
-          width: "380px", height: "380px",
-          backgroundColor: "rgba(172, 182, 166, 0.13)",
-          borderRadius: "50%", pointerEvents: "none",
-        }} />
-
-        <div className="relative z-10 max-w-5xl mx-auto">
-
-          {/* "REAL PEOPLE. REAL SHIFTS." badge */}
-          <div className="flex justify-center mb-8">
-            <span
-              style={{
-                backgroundColor: "rgba(244,167,185,0.1)",
-                border: "1px solid rgba(244,167,185,0.45)",
-                color: "#b05570",
-                fontFamily: sans,
-                letterSpacing: "0.14em",
-              }}
-              className="flex items-center gap-2 px-5 py-2 rounded-full text-xs uppercase"
-            >
-              <span style={{ backgroundColor: C.pink }} className="w-1.5 h-1.5 rounded-full flex-shrink-0" />
-              Real People. Real Shifts.
-            </span>
-          </div>
-
-          {/* Headline */}
-          <h2
-            style={{ fontFamily: serif, color: C.dark }}
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-center leading-tight mb-4"
-          >
-            Something shifts when you
-            <br />
-            <span style={{ color: C.forest, fontStyle: "italic" }}>see yourself there.</span>
-          </h2>
-
-          {/* Subtitle */}
-          <p
-            style={{ fontFamily: serif, color: C.muted, fontStyle: "italic" }}
-            className="text-center text-lg mb-14"
-          >
-            This is what people feel the moment it becomes real.
-          </p>
-
-          {/* Testimonial cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-            {[
-              {
-                accent: C.forest,
-                quoteNode: (
-                  <>
-                    <em>I cried the first time I saw myself in my dream home.</em>
-                    {" "}Something shifted that day.{" "}
-                    <em>I haven&apos;t stopped believing since.</em>
-                  </>
-                ),
-                name: "Aaliyah",
-                age: 24,
-                city: "Miami, FL",
-                avatarBg: "#1E5940",
-                initial: "A",
-              },
-              {
-                accent: C.gold,
-                quoteNode: (
-                  <>
-                    <em>I&apos;ve done vision boards before but nothing felt real until I saw</em>
-                    {" "}my actual face there.{" "}
-                    <em>I check it every morning now. It&apos;s the first thing I do.</em>
-                  </>
-                ),
-                name: "Marcus",
-                age: 26,
-                city: "Atlanta, GA",
-                avatarBg: "#7A5E2A",
-                initial: "M",
-              },
-              {
-                accent: C.pink,
-                quoteNode: (
-                  <>
-                    <em>The daily practice changed everything. I used to doubt it. Now it just</em>
-                    {" "}feels like a matter of time.{" "}
-                    <em>I wake up excited about my life.</em>
-                  </>
-                ),
-                name: "Sofia",
-                age: 22,
-                city: "Los Angeles, CA",
-                avatarBg: "#A04060",
-                initial: "S",
-              },
-            ].map((t, i) => (
-              <div
-                key={i}
-                style={{
-                  backgroundColor: "#f5f0ea",
-                  borderTop: `3px solid ${t.accent}`,
-                }}
-                className="rounded-2xl p-7 flex flex-col justify-between"
-              >
-                {/* Large quotation mark */}
-                <div>
-                  <p
-                    style={{
-                      fontFamily: serif,
-                      color: "rgba(0,0,0,0.12)",
-                      fontSize: "3rem",
-                      lineHeight: 1,
-                      marginBottom: "12px",
-                    }}
-                  >
-                    &ldquo;
-                  </p>
-                  <p
-                    style={{ fontFamily: serif, color: C.dark }}
-                    className="text-base leading-relaxed mb-8"
-                  >
-                    {t.quoteNode}
-                  </p>
-                </div>
-
-                {/* Footer: avatar + name/city + stars */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div
-                      style={{
-                        backgroundColor: t.avatarBg,
-                        color: "white",
-                        fontFamily: sans,
-                        width: "38px",
-                        height: "38px",
-                        borderRadius: "50%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "13px",
-                        fontWeight: "700",
-                        flexShrink: 0,
-                      }}
-                    >
-                      {t.initial}
-                    </div>
-                    <div>
-                      <p style={{ color: C.dark, fontFamily: sans }} className="text-sm font-semibold leading-tight">
-                        {t.name}
-                      </p>
-                      <p style={{ color: C.muted, fontFamily: sans }} className="text-xs">
-                        {t.age} · {t.city}
-                      </p>
-                    </div>
-                  </div>
-                  <span style={{ color: C.gold, letterSpacing: "1px" }} className="text-sm">
-                    ★★★★★
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Stats bar */}
-          <div
-            style={{ backgroundColor: "#f5f0ea" }}
-            className="rounded-2xl px-8 py-8"
-          >
-            <div className="flex flex-col md:flex-row items-center justify-center divide-y md:divide-y-0 md:divide-x divide-[#e0d8ce] gap-0">
-              {[
-                { value: "1,000+", label: "People on the waitlist", color: C.forest },
-                { value: "2 min", label: "Daily practice time", color: C.forest },
-              ].map((stat, i) => (
-                <div key={i} className="flex flex-col items-center py-5 md:py-0 md:px-16 w-full md:w-auto">
-                  <p style={{ fontFamily: serif, color: stat.color }} className="text-4xl font-bold mb-1">
-                    {stat.value}
-                  </p>
-                  <p style={{ color: C.muted, fontFamily: sans }} className="text-sm">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-        </div>
-      </section>
 
       {/* ──────────────────────────────────────────
           SECTION 5 — THE FEELING
