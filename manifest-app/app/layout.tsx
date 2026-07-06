@@ -17,6 +17,9 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Dreamt — Your Dream Life Awaits",
   description: "AI-powered manifestation. See yourself living your dream life.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
