@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "Dreamt — Your Dream Life Awaits",
   description: "AI-powered manifestation. See yourself living your dream life.",
   icons: {
-    icon: "/icon.png",
+    icon: "/icon.svg",
   },
 };
 
