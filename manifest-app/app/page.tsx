@@ -16,35 +16,14 @@ const C = {
 const serif = "var(--font-playfair, Georgia, serif)";
 const sans = "var(--font-geist-sans, system-ui, sans-serif)";
 
-function LeafLogo() {
+function DreamtLogo() {
   return (
-    <div className="flex items-center gap-3">
-      <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <clipPath id="logo-clip">
-            <circle cx="50" cy="50" r="50" />
-          </clipPath>
-        </defs>
-        <circle cx="50" cy="50" r="50" fill="#2D6A4F" />
-        <g clipPath="url(#logo-clip)">
-          {/* Golden sun */}
-          <circle cx="50" cy="36" r="10" fill="#E8B84B" />
-          {/* Sun rays */}
-          <line x1="50" y1="20" x2="50" y2="15" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-          <line x1="62" y1="24" x2="65" y2="19" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-          <line x1="70" y1="36" x2="75" y2="36" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-          <line x1="38" y1="24" x2="35" y2="19" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-          <line x1="30" y1="36" x2="25" y2="36" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-          <line x1="57" y1="21" x2="61" y2="16" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-          <line x1="43" y1="21" x2="39" y2="16" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-          {/* Horizon line */}
-          <line x1="0" y1="46" x2="100" y2="46" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" />
-          {/* Winding path */}
-          <path
-            d="M50 46 C44 54 30 57 34 68 C38 79 60 77 55 90 C52 99 42 106 38 114"
-            stroke="white" strokeWidth="11" strokeLinecap="round" fill="none"
-          />
-        </g>
+    <div className="flex items-center gap-2">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"
+          fill="#2D6A4F"
+        />
       </svg>
       <span style={{ color: C.forest, fontFamily: serif }} className="text-2xl font-semibold">
         Dreamt
@@ -249,7 +228,7 @@ export default function Home() {
 
         {/* Navbar */}
         <nav className="relative z-10 flex items-center justify-between px-5 md:px-12 py-5 w-full">
-          <LeafLogo />
+          <DreamtLogo />
           <button
             onClick={() => document.getElementById("hero-email")?.focus()}
             style={{
@@ -328,12 +307,12 @@ export default function Home() {
             style={{ transform: "rotate(-6deg)", zIndex: 0, position: "relative", width: "256px", height: "553px", flexShrink: 0 }}
             className="hidden lg:block rounded-3xl overflow-hidden shadow-sm"
           >
-            <img src="/onboarding.png" alt="Dreamt onboarding mockup" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+            <img src="/onbording.png" alt="Dreamt onboarding mockup" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
           </div>
 
           {/* Center — VISION BOARD (always visible, on top) */}
           <img
-            src="/vision-board.png"
+            src="/vision-board-new.png"
             alt="Dreamt vision board mockup"
             style={{ zIndex: 10, position: "relative" }}
             className="w-56 sm:w-64 md:w-72 rounded-3xl flex-shrink-0 shadow-md"
@@ -344,7 +323,7 @@ export default function Home() {
             style={{ transform: "rotate(6deg)", zIndex: 0, position: "relative", width: "256px", height: "553px", flexShrink: 0 }}
             className="hidden lg:block rounded-3xl overflow-hidden shadow-sm"
           >
-            <img src="/daily-practice.png" alt="Dreamt daily practice mockup" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+            <img src="/daily.png" alt="Dreamt daily practice mockup" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
           </div>
         </div>
 
@@ -355,152 +334,105 @@ export default function Home() {
       ────────────────────────────────────────── */}
       <section
         style={{ backgroundColor: C.forest }}
-        className="relative py-16 px-6 overflow-hidden"
+        className="relative py-16 md:py-20 px-6 overflow-hidden"
       >
-        {/* Background blob */}
+        {/* Decorative circle — left (filled solid lighter green) */}
         <div style={{
-          position: "absolute", top: "-100px", left: "-180px",
+          position: "absolute", top: "50%", left: "-200px", transform: "translateY(-50%)",
           width: "480px", height: "480px",
-          backgroundColor: "rgba(172, 182, 166, 0.18)",
+          backgroundColor: "rgba(255,255,255,0.07)",
           borderRadius: "50%", pointerEvents: "none",
         }} />
 
-        <div className="relative z-10 max-w-2xl mx-auto">
+        {/* Decorative circle — right (outline only) */}
+        <div style={{
+          position: "absolute", top: "50%", right: "-200px", transform: "translateY(-50%)",
+          width: "480px", height: "480px",
+          border: "1.5px solid rgba(255,255,255,0.1)",
+          borderRadius: "50%", pointerEvents: "none",
+        }} />
 
-          {/* "SOUND FAMILIAR" badge */}
-          <div className="flex justify-center mb-14">
-            <span
-              style={{
-                backgroundColor: "rgba(255,255,255,0.1)",
-                border: "1px solid rgba(255,255,255,0.15)",
-                color: "rgba(255,255,255,0.65)",
-                fontFamily: sans,
-                letterSpacing: "0.14em",
-              }}
-              className="flex items-center gap-2 px-5 py-2 rounded-full text-xs uppercase"
-            >
-              <span style={{ backgroundColor: C.pink }} className="w-1.5 h-1.5 rounded-full flex-shrink-0" />
-              Sound Familiar
-            </span>
-          </div>
+        <div className="relative z-10 max-w-5xl mx-auto">
 
-          {/* Row 01 */}
-          <div className="relative">
-            <div style={{ borderTopColor: "rgba(255,255,255,0.13)" }} className="border-t" />
-            <span style={{ color: "rgba(255,255,255,0.22)", fontFamily: sans, position: "absolute", top: "-9px", left: 0 }} className="text-xs">
-              01
-            </span>
-            <div className="py-8 text-center">
-              <p style={{ fontFamily: serif, color: "white" }} className="text-2xl md:text-3xl leading-snug">
-                You&apos;ve seen it in your head a thousand times.
-              </p>
-            </div>
-          </div>
+          {/* Headline */}
+          <h2 style={{ fontFamily: serif, color: "white" }} className="text-3xl md:text-6xl font-bold text-center leading-tight mb-5">
+            You&apos;ve seen it in your head
+            <br />
+            <span style={{ color: C.gold, fontStyle: "italic" }}>a thousand times.</span>
+          </h2>
 
-          {/* Row 02 */}
-          <div className="relative">
-            <div style={{ borderTopColor: "rgba(255,255,255,0.13)" }} className="border-t" />
-            <span style={{ color: "rgba(255,255,255,0.22)", fontFamily: sans, position: "absolute", top: "-9px", left: 0 }} className="text-xs">
-              02
-            </span>
-            <div className="py-8 text-center">
-              <p style={{ fontFamily: serif, color: "white" }} className="text-2xl md:text-3xl leading-snug">
-                The{" "}
-                <span style={{ color: C.gold, fontStyle: "italic" }}>home.</span>
-                {" "}The{" "}
-                <span style={{ color: C.gold, fontStyle: "italic" }}>car.</span>
-                {" "}The{" "}
-                <span style={{ color: C.gold, fontStyle: "italic" }}>freedom.</span>
-                {" "}The{" "}
-                <span style={{ color: C.gold, fontStyle: "italic" }}>love.</span>
-              </p>
-            </div>
-          </div>
+          <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.55)", fontStyle: "italic" }} className="text-center text-base md:text-xl mb-10 md:mb-14">
+            But it still feels like{" "}
+            <span style={{ color: C.gold }}>someday</span>.
+          </p>
 
-          {/* Row 03 — italic, fading */}
-          <div className="relative">
-            <div style={{ borderTopColor: "rgba(255,255,255,0.13)" }} className="border-t" />
-            <span style={{ color: "rgba(255,255,255,0.15)", fontFamily: sans, position: "absolute", top: "-9px", left: 0 }} className="text-xs">
-              03
-            </span>
-            <div className="py-8 text-center">
-              <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.52)", fontStyle: "italic" }} className="text-2xl md:text-3xl leading-snug">
-                But it still feels like someday.
-              </p>
-            </div>
-          </div>
-
-          {/* Row 04 — most faded */}
-          <div className="relative">
-            <div style={{ borderTopColor: "rgba(255,255,255,0.13)" }} className="border-t" />
-            <span style={{ color: "rgba(255,255,255,0.1)", fontFamily: sans, position: "absolute", top: "-9px", left: 0 }} className="text-xs">
-              04
-            </span>
-            <div className="py-8 text-center">
-              <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.32)" }} className="text-2xl md:text-3xl leading-snug">
-                Like a fantasy. Like it&apos;s meant for someone else.
-              </p>
-            </div>
-          </div>
-
-          {/* Closing divider */}
-          <div style={{ borderTopColor: "rgba(255,255,255,0.13)" }} className="border-t" />
-
-          {/* THE TRUTH card */}
-          <div className="my-10">
-            <div
-              style={{
-                backgroundColor: "rgba(255,255,255,0.07)",
-                border: "1px solid rgba(255,255,255,0.12)",
-              }}
-              className="rounded-2xl px-5 sm:px-8 py-8 sm:py-10 text-center relative overflow-hidden"
-            >
-              {/* Card blobs */}
-              <div style={{
-                position: "absolute", bottom: "-50px", left: "-50px",
-                width: "180px", height: "180px",
-                backgroundColor: "rgba(45,106,79,0.5)",
-                borderRadius: "50%", pointerEvents: "none",
-              }} />
-              <div style={{
-                position: "absolute", top: "-40px", right: "-40px",
-                width: "140px", height: "140px",
-                backgroundColor: "rgba(25,65,45,0.55)",
-                borderRadius: "50%", pointerEvents: "none",
-              }} />
-
-              <div className="relative z-10">
-                <p
-                  style={{ color: "rgba(255,255,255,0.38)", fontFamily: sans, letterSpacing: "0.16em" }}
-                  className="text-xs uppercase mb-7"
-                >
-                  The Truth
-                </p>
-                <p style={{ fontFamily: serif, color: "white" }} className="text-xl md:text-2xl font-bold leading-snug mb-2">
-                  It&apos;s not meant for someone else.
-                </p>
-                <p style={{ fontFamily: serif, color: "white" }} className="text-xl md:text-2xl font-bold leading-snug mb-6">
-                  You just haven&apos;t{" "}
-                  <span style={{ color: C.pink, fontStyle: "italic" }}>seen yourself there</span>
-                  {" "}yet.
-                </p>
-                <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.42)", fontStyle: "italic" }} className="text-sm mb-7">
-                  That&apos;s exactly what Dreamt changes.
-                </p>
-                {/* Dot · line · dot */}
-                <div className="flex items-center justify-center gap-2">
-                  <div style={{ backgroundColor: C.gold }} className="w-1.5 h-1.5 rounded-full" />
-                  <div style={{ backgroundColor: "rgba(255,255,255,0.25)", width: "32px", height: "1px" }} />
-                  <div style={{ backgroundColor: C.pink }} className="w-1.5 h-1.5 rounded-full" />
+          {/* 4-column card row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-5">
+            {[
+              { img: "/dream-home.png",    label: "The Home",    sub: "Where you wake up every morning", pos: "top"    },
+              { img: "/dream-car.png",     label: "The Car",     sub: "How you move through the world",  pos: "bottom" },
+              { img: "/dream-freedom.png", label: "The Freedom", sub: "Time, money, and peace of mind",  pos: "92%"    },
+              { img: "/dream-love.png",    label: "The Love",    sub: "The people by your side",         pos: "bottom" },
+            ].map((item) => (
+              <div
+                key={item.label}
+                style={{
+                  backgroundColor: "rgba(0,0,0,0.2)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  borderRadius: "14px",
+                  overflow: "hidden",
+                }}
+              >
+                <div style={{ width: "100%", height: "180px", overflow: "hidden" }}>
+                  <img
+                    src={item.img}
+                    alt={item.label}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: item.pos }}
+                  />
+                </div>
+                <div className="px-5 py-5">
+                  <p style={{ fontFamily: serif, color: "white" }} className="font-semibold text-lg mb-1">{item.label}</p>
+                  <p style={{ fontFamily: sans, color: "rgba(255,255,255,0.45)" }} className="text-sm leading-relaxed">{item.sub}</p>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
 
-          {/* KEEP GOING */}
-          <div className="flex justify-center pb-6">
-            <p style={{ color: "rgba(255,255,255,0.3)", fontFamily: sans, letterSpacing: "0.16em" }} className="text-xs uppercase">
-              Keep Going
+          {/* THE TRUTH card */}
+          <div
+            style={{
+              backgroundColor: "rgba(0,0,0,0.2)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderRadius: "16px",
+              position: "relative",
+            }}
+            className="px-5 md:px-8 py-6 text-center"
+          >
+            {/* Large quote marks — top left */}
+            <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.18)", fontSize: "2rem", lineHeight: 1, position: "absolute", top: "16px", left: "24px" }}>&ldquo;&ldquo;</p>
+
+            {/* THE TRUTH label */}
+            <div className="flex items-center gap-4 mb-4">
+              <div style={{ height: "1px", backgroundColor: "rgba(255,255,255,0.15)", flex: 1 }} />
+              <span style={{ color: "rgba(255,255,255,0.4)", fontFamily: sans, letterSpacing: "0.2em" }} className="text-xs uppercase whitespace-nowrap">The Truth</span>
+              <div style={{ height: "1px", backgroundColor: "rgba(255,255,255,0.15)", flex: 1 }} />
+            </div>
+
+            <p style={{ fontFamily: serif, color: "white" }} className="text-lg md:text-xl font-bold leading-snug mb-1">
+              It&apos;s not meant for someone else.
+            </p>
+            <p style={{ fontFamily: serif, color: "white" }} className="text-lg md:text-xl font-bold leading-snug mb-4">
+              You just haven&apos;t{" "}
+              <span style={{ color: C.pink, fontStyle: "italic" }}>seen yourself there</span>
+              {" "}yet.
+            </p>
+
+            <p style={{ color: C.gold }} className="text-sm mb-3">✦</p>
+
+            <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.5)", fontStyle: "italic" }} className="text-sm">
+              That&apos;s exactly what{" "}
+              <span style={{ color: C.gold }}>Dreamt</span>
+              {" "}changes.
             </p>
           </div>
 
@@ -510,7 +442,7 @@ export default function Home() {
       {/* ──────────────────────────────────────────
           SECTION 3 — HOW IT WORKS
       ────────────────────────────────────────── */}
-      <section style={{ backgroundColor: C.cream }} className="relative py-24 px-6 overflow-hidden">
+      <section style={{ backgroundColor: C.cream }} className="relative pt-24 pb-24 px-6 overflow-hidden">
         {/* Background blob */}
         <div style={{
           position: "absolute", top: "-80px", left: "-160px",
@@ -562,35 +494,35 @@ export default function Home() {
               {
                 num: 1,
                 cardBg: "#cee8d8",
-                mockupSrc: "/onboarding.png",
+                mockupSrc: "/onbording.png",
                 mockupAlt: "Dreamt onboarding mockup",
                 mockupOffset: 0,
                 badgeBg: "rgba(45,106,79,0.1)",
                 badgeColor: C.forest,
                 title: "Build your dream life",
-                desc: "Answer a few deep questions. Where you live. What you drive. How you feel when you wake up. We build your world from your words.",
+                desc: "Answer 5 questions. Your home, your car, your career, your relationships. AI generates your exact vision, personalized to you.",
               },
               {
                 num: 2,
                 cardBg: C.forest,
-                mockupSrc: "/vision-board.png",
-                mockupAlt: "Dreamt vision board mockup",
+                mockupSrc: "/daily.png",
+                mockupAlt: "Dreamt morning session mockup",
                 mockupOffset: 0,
                 badgeBg: "rgba(245,200,66,0.22)",
                 badgeColor: "#8a6800",
-                title: "See yourself inside it",
-                desc: "AI places you — your face, your energy — inside your exact dream life. Not a fantasy. You. There. Now.",
+                title: "Feel it every morning",
+                desc: "A 2-minute guided audio session puts you inside your dream life before your day starts. Your voice, your home, your vision, every single morning.",
               },
               {
                 num: 3,
                 cardBg: "#fce8ec",
-                mockupSrc: "/daily-practice.png",
-                mockupAlt: "Dreamt daily practice mockup",
+                mockupSrc: "/sam-2.png",
+                mockupAlt: "Sam AI coach mockup",
                 mockupOffset: 60,
                 badgeBg: "rgba(244,167,185,0.22)",
                 badgeColor: "#b05570",
-                title: "Feel it every single day",
-                desc: "Every morning, a 60 second visualization puts you inside your dream life. Every evening, a simple check-in keeps you aligned.",
+                title: "Talk it through with Sam",
+                desc: "Sam is your personal AI coach. He already knows your goals, your situation, and your full journey. Available 24/7, never generic, always specific to you.",
               },
             ].map((step) => (
               <div
@@ -599,16 +531,19 @@ export default function Home() {
                 className="rounded-2xl overflow-hidden shadow-sm flex flex-col"
               >
                 <div
-                  className="overflow-hidden h-[420px] md:h-[560px]"
+                  className="overflow-hidden h-[360px] md:h-[390px]"
+                  style={{ position: "relative" }}
                 >
                   <img
                     src={step.mockupSrc}
                     alt={step.mockupAlt}
                     style={{
-                      display: "block", width: "100%", height: "100%",
-                      objectFit: "cover", objectPosition: "top",
-                      transform: step.num === 3 ? "scale(1.2)" : "none",
-                      transformOrigin: "top center",
+                      position: "absolute",
+                      top: 0,
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      height: "133%",
+                      width: "auto",
                     }}
                   />
                 </div>
@@ -647,7 +582,7 @@ export default function Home() {
           </div>
 
           {/* Bottom tagline + CTA */}
-          <div className="flex flex-col items-center mt-20 gap-7">
+          <div className="flex flex-col items-center mt-8 gap-7">
             <p style={{ fontFamily: serif, color: C.dark }} className="text-xl md:text-2xl text-center">
               <span style={{ fontStyle: "italic", color: C.muted }}>
                 Your dream life isn&apos;t someday.
@@ -674,112 +609,198 @@ export default function Home() {
 
 
       {/* ──────────────────────────────────────────
-          SECTION 5 — THE FEELING
+          SECTION — MEET SAM
       ────────────────────────────────────────── */}
-      <section style={{ backgroundColor: C.dark }} className="relative py-20 px-6 text-center overflow-hidden">
-
+      <section style={{ backgroundColor: C.cream }} className="relative pt-10 pb-16 px-6 overflow-hidden">
         {/* Background blobs */}
         <div style={{
-          position: "absolute", top: "-80px", left: "-160px",
+          position: "absolute", top: "-80px", right: "-160px",
           width: "420px", height: "420px",
-          backgroundColor: "rgba(45,106,79,0.22)",
+          backgroundColor: "rgba(45,106,79,0.12)",
           borderRadius: "50%", pointerEvents: "none",
         }} />
         <div style={{
-          position: "absolute", top: "60px", right: "-120px",
-          width: "360px", height: "360px",
-          backgroundColor: "rgba(80,80,80,0.25)",
+          position: "absolute", bottom: "-60px", left: "-100px",
+          width: "320px", height: "320px",
+          backgroundColor: "rgba(244,167,185,0.15)",
           borderRadius: "50%", pointerEvents: "none",
         }} />
 
-        <div className="relative z-10 max-w-3xl mx-auto">
+        <div className="relative z-10 max-w-7xl mx-auto">
 
-          {/* ——— THE TRUTH ——— */}
-          <div className="flex items-center justify-center gap-4 mb-14">
-            <div style={{ width: "44px", height: "1px", backgroundColor: "rgba(255,255,255,0.2)" }} />
-            <span style={{ color: "rgba(255,255,255,0.32)", fontFamily: sans, letterSpacing: "0.2em" }} className="text-xs uppercase">
-              The Truth
-            </span>
-            <div style={{ width: "44px", height: "1px", backgroundColor: "rgba(255,255,255,0.2)" }} />
-          </div>
 
           {/* Headline */}
-          <h2 style={{ fontFamily: serif }} className="font-bold leading-tight mb-5">
-            <span style={{ color: "white" }} className="text-4xl md:text-5xl block">
-              Your dream life
-            </span>
-            <span style={{ color: C.forest, fontStyle: "italic" }} className="text-4xl md:text-5xl block">
-              already exists.
-            </span>
+          <h2 style={{ fontFamily: serif }} className="font-bold text-center leading-tight mb-4">
+            <span style={{ color: C.dark }} className="text-4xl md:text-6xl block">Meet Sam</span>
+            <span style={{ color: C.forest, fontStyle: "italic" }} className="text-4xl md:text-6xl block">your personal coach</span>
           </h2>
 
-          {/* Subheadline — "feel it" in pink */}
-          <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.5)", fontStyle: "italic" }} className="text-base md:text-lg mb-10">
-            It&apos;s waiting for you to{" "}
-            <strong style={{ color: C.pink, fontStyle: "normal" }}>feel it</strong>
-            {" "}first.
-          </p>
-
-          {/* Dark pills */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {[
-              { label: "Abundance", dot: C.forest },
-              { label: "Wealth",    dot: C.gold   },
-              { label: "Love",      dot: C.pink   },
-            ].map((p) => (
-              <span
-                key={p.label}
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.07)",
-                  border: "1px solid rgba(255,255,255,0.13)",
-                  color: "rgba(255,255,255,0.65)",
-                  fontFamily: sans,
-                }}
-                className="flex items-center gap-2 px-5 py-2 rounded-full text-sm"
-              >
-                <span style={{ backgroundColor: p.dot }} className="w-1.5 h-1.5 rounded-full flex-shrink-0" />
-                {p.label}
-              </span>
-            ))}
+          {/* Body */}
+          <div className="text-center mb-12">
+            <p style={{ fontFamily: serif, color: C.muted }} className="text-lg md:text-xl mb-1">
+              Sam knows your dream, your current reality,<br />and everything in between.
+            </p>
+            <p style={{ fontFamily: serif, color: C.dark, fontWeight: 700 }} className="text-lg md:text-xl">
+              He&apos;s not a chatbot. He&apos;s a coach who already knows you
+            </p>
           </div>
 
-          {/* Quote card */}
-          <div
-            style={{
-              backgroundColor: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.1)",
-            }}
-            className="rounded-2xl px-5 sm:px-8 md:px-12 py-8 md:py-10 text-center"
-          >
-            {/* Small faint quotation mark */}
-            <p style={{
-              fontFamily: serif,
-              color: "rgba(255,255,255,0.12)",
-              fontSize: "2rem",
-              lineHeight: 1,
-              textAlign: "left",
-              marginBottom: "12px",
-            }}>
-              &ldquo;
-            </p>
+          {/* 3-col layout */}
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 items-center">
 
-            {/* Quote */}
-            <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.88)" }} className="text-lg md:text-xl leading-relaxed mb-8">
-              <em>The moment you see yourself{" "}
-              <strong style={{ fontStyle: "normal" }}>already living it</strong>
-              {" "}— really see yourself there — something in you stops waiting and starts believing.</em>
-            </p>
-
-            {/* ——— The Dreamt philosophy ——— */}
-            <div className="flex items-center justify-center gap-4">
-              <div style={{ width: "36px", height: "1px", backgroundColor: "rgba(255,255,255,0.15)" }} />
-              <span style={{ color: "rgba(255,255,255,0.25)", fontFamily: sans, letterSpacing: "0.16em" }} className="text-xs uppercase">
-                The Dreamt philosophy
-              </span>
-              <div style={{ width: "36px", height: "1px", backgroundColor: "rgba(255,255,255,0.15)" }} />
+            {/* Left — feature bullets */}
+            <div className="flex flex-col gap-8">
+              {[
+                { icon: "🎯", title: "Built around you",     desc: "Sam learns what matters most to you and builds your plan." },
+                { icon: "💬", title: "Real conversations",   desc: "Talk naturally. Get real answers, not generic advice."      },
+                { icon: "🔒", title: "Always by your side",  desc: "Available 24/7 to support your journey."                   },
+              ].map((f) => (
+                <div key={f.title} className="flex items-start gap-4">
+                  <div
+                    style={{ backgroundColor: "rgba(45,106,79,0.08)", border: "1px solid rgba(45,106,79,0.15)", flexShrink: 0 }}
+                    className="w-11 h-11 rounded-full flex items-center justify-center text-xl"
+                  >
+                    {f.icon}
+                  </div>
+                  <div>
+                    <p style={{ fontFamily: sans, color: C.forest }} className="font-semibold text-sm mb-1">{f.title}</p>
+                    <p style={{ fontFamily: sans, color: C.muted }} className="text-sm leading-relaxed">{f.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
 
+            {/* Center — phones (hidden on mobile, too tall) */}
+            <div className="hidden md:flex items-end justify-center gap-4">
+              <img src="/sam-1.png" alt="Sam ready" style={{ height: "540px", width: "auto", display: "block" }} />
+              <img src="/sam-2.png" alt="Sam chat" style={{ height: "540px", width: "auto", display: "block" }} />
+            </div>
+
+            {/* Right — quote card */}
+            <div
+              style={{ backgroundColor: "white", border: "1px solid #e8e0d4" }}
+              className="rounded-2xl p-8 shadow-sm flex flex-col gap-5"
+            >
+              <p style={{ fontFamily: serif, color: C.forest, fontSize: "3rem", lineHeight: 1 }}>&ldquo;</p>
+              <p style={{ fontFamily: serif, color: C.dark }} className="text-lg leading-relaxed">
+                Having someone who truly gets me changes everything.
+              </p>
+              <p style={{ fontFamily: sans, color: C.muted }} className="text-sm leading-relaxed">
+                Thousands already building their dream life with Sam.
+              </p>
+              <div>
+                <p style={{ color: C.gold }} className="text-lg mb-1">★★★★★</p>
+                <p style={{ fontFamily: sans, color: C.muted }} className="text-xs">4.9/5</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────
+          SECTION 5 — THE FEELING
+      ────────────────────────────────────────── */}
+      <section style={{ backgroundColor: C.forest, position: "relative", overflow: "hidden" }}>
+
+        {/* Grain texture */}
+        <div style={{
+          position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1,
+          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          opacity: 0.06,
+        }} />
+
+        {/* Decorative circle — left */}
+        <div style={{
+          position: "absolute", top: "50%", left: "-180px", transform: "translateY(-50%)",
+          width: "500px", height: "500px",
+          border: "1px solid rgba(255,255,255,0.07)",
+          borderRadius: "50%", pointerEvents: "none", zIndex: 2,
+        }} />
+
+        {/* Decorative circle — right */}
+        <div style={{
+          position: "absolute", top: "50%", right: "-180px", transform: "translateY(-50%)",
+          width: "500px", height: "500px",
+          border: "1px solid rgba(255,255,255,0.05)",
+          borderRadius: "50%", pointerEvents: "none", zIndex: 2,
+        }} />
+
+        {/* Main content */}
+        <div className="relative px-6 md:px-16 py-20" style={{ zIndex: 10 }}>
+          <div className="max-w-3xl mx-auto text-center">
+
+            {/* Badge */}
+            <div className="flex justify-center mb-10">
+              <span style={{ color: "rgba(255,255,255,0.6)", fontFamily: sans, letterSpacing: "0.18em", backgroundColor: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }} className="flex items-center gap-2 px-5 py-2 rounded-full text-xs uppercase">
+                <span style={{ backgroundColor: C.gold }} className="w-1.5 h-1.5 rounded-full flex-shrink-0" />
+                The Truth
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h2 style={{ fontFamily: serif, lineHeight: 1.05, marginBottom: "24px", fontWeight: 700 }}>
+              <span style={{ color: "white" }} className="text-4xl md:text-7xl block">Your dream life</span>
+              <span style={{ color: C.gold, fontStyle: "italic" }} className="text-4xl md:text-7xl block">already exists.</span>
+            </h2>
+
+            {/* Subtitle */}
+            <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.7)", fontSize: "20px", marginBottom: "32px" }}>
+              It&apos;s waiting for you to{" "}
+              <strong style={{ color: C.pink }}>feel it</strong>
+              {" "}first.
+            </p>
+
+            {/* Pills */}
+            <div className="flex flex-wrap justify-center gap-2 mb-12">
+              {[
+                { label: "Home", icon: "🏡" },
+                { label: "Career", icon: "💼" },
+                { label: "Relationships", icon: "💗" },
+                { label: "Freedom", icon: "🌍" },
+                { label: "Peace", icon: "🌿" },
+              ].map((p) => (
+                <span key={p.label} style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.18)", color: "white", fontFamily: sans }} className="flex items-center gap-2 px-4 py-1.5 rounded-full text-sm whitespace-nowrap">
+                  <span>{p.icon}</span>{p.label}
+                </span>
+              ))}
+            </div>
+
+            {/* Quote card */}
+            <div style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)" }} className="rounded-2xl px-5 md:px-8 py-8 mb-12">
+              <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.2)", fontSize: "2.2rem", lineHeight: 1, marginBottom: "16px" }}>&ldquo;</p>
+              <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.85)", fontStyle: "italic" }} className="text-xl leading-relaxed mb-3">
+                The moment you see yourself already living it,
+              </p>
+              <p style={{ fontFamily: serif, color: C.gold, fontWeight: 700 }} className="text-xl leading-relaxed mb-3">
+                your brain begins treating it as possible.
+              </p>
+              <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.45)", fontStyle: "italic" }} className="text-base leading-relaxed mb-7">
+                That&apos;s when your actions start to change.
+              </p>
+              <div className="flex items-center gap-3">
+                <div style={{ height: "1px", backgroundColor: "rgba(255,255,255,0.15)", flex: 1 }} />
+                <span style={{ color: "rgba(255,255,255,0.3)", fontFamily: sans, letterSpacing: "0.18em" }} className="text-xs uppercase whitespace-nowrap">The Dreamt Philosophy</span>
+                <div style={{ height: "1px", backgroundColor: "rgba(255,255,255,0.15)", flex: 1 }} />
+              </div>
+            </div>
+
+            {/* Bottom tagline */}
+            <div className="flex items-center gap-4 mb-4 max-w-xs mx-auto">
+              <div style={{ height: "1px", backgroundColor: "rgba(255,255,255,0.18)", flex: 1 }} />
+              <span style={{ color: C.gold }}>✦</span>
+              <div style={{ height: "1px", backgroundColor: "rgba(255,255,255,0.18)", flex: 1 }} />
+            </div>
+            <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.5)", fontStyle: "italic" }} className="text-sm mb-1">
+              Dreamt isn&apos;t about pretending your dream life exists.
+            </p>
+            <p style={{ fontFamily: serif, color: "rgba(255,255,255,0.85)" }} className="text-sm">
+              It&apos;s about training your mind to{" "}
+              <strong style={{ color: C.gold }}>recognize the path</strong>
+              {" "}toward it.
+            </p>
+
+          </div>
         </div>
       </section>
 
@@ -806,7 +827,7 @@ export default function Home() {
 
           {/* Centered logo */}
           <div className="flex justify-center mb-12">
-            <LeafLogo />
+            <DreamtLogo />
           </div>
 
           {/* Headline */}
@@ -831,26 +852,11 @@ export default function Home() {
           <div className="mb-4">
             <WideEmailForm
               buttonText="I'M READY"
-              microcopy="No spam ever · Unsubscribe anytime · Free to join"
+              microcopy="7-day free trial · Cancel anytime"
             />
           </div>
 
-          {/* DREAMT — COMING SOON badge */}
-          <div className="flex justify-center mt-10 mb-20">
-            <span
-              style={{
-                backgroundColor: "rgba(45,106,79,0.07)",
-                border: "1px solid rgba(45,106,79,0.2)",
-                color: C.forest,
-                fontFamily: sans,
-                letterSpacing: "0.14em",
-              }}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-full text-xs uppercase"
-            >
-              <span style={{ backgroundColor: C.forest }} className="w-1.5 h-1.5 rounded-full flex-shrink-0" />
-              Dreamt — Coming Soon
-            </span>
-          </div>
+          <div className="mt-10 mb-20" />
 
           {/* Three value cards */}
           <div className="grid grid-cols-3 gap-3 md:gap-4 mb-16">
@@ -862,7 +868,7 @@ export default function Home() {
               <div
                 key={v.title}
                 style={{ backgroundColor: "white" }}
-                className="rounded-2xl px-6 py-7 flex flex-col items-center text-center shadow-sm"
+                className="rounded-2xl px-3 md:px-6 py-5 md:py-7 flex flex-col items-center text-center shadow-sm"
               >
                 <div style={{ backgroundColor: v.dot }} className="w-3 h-3 rounded-full mb-3" />
                 <p style={{ color: C.dark, fontFamily: sans }} className="font-semibold text-sm mb-1">
