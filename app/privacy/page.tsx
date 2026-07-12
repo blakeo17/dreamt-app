@@ -247,6 +247,13 @@ export default function PrivacyPage() {
           >
             Privacy
           </Link>
+          <Link
+            href="/support"
+            style={{ color: C.muted }}
+            className="text-sm hover:opacity-60 transition-opacity no-underline"
+          >
+            Support
+          </Link>
         </div>
       </div>
 
