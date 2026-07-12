@@ -889,6 +889,9 @@ export default function Home() {
             <Link href="/terms" style={{ color: C.muted }} className="text-sm hover:opacity-60 transition-opacity no-underline">
               Terms
             </Link>
+            <Link href="/support" style={{ color: C.muted }} className="text-sm hover:opacity-60 transition-opacity no-underline">
+              Support
+            </Link>
           </div>
 
         </div>
