@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 
 const C = {
@@ -49,146 +48,34 @@ function PhoneMockup({ label }: { label: string }) {
   );
 }
 
-const LOOPS_FORM_URL = "https://app.loops.so/api/newsletter-form/cmn85yiux0kp10i0qxkxjaca3";
-const LOOPS_MAILING_LIST = "cmo9lgz983qfn0i0i36u1egut";
+const APP_STORE_URL = "https://apps.apple.com/us/app/dreamt-live-your-dream-life/id6784854027";
 
-// Wide email form — used in hero and final CTA
-function WideEmailForm({
-  buttonText = "Join Waitlist",
-  microcopy = "Be first to know when we launch · No spam ever",
-  inputId,
+// App Store download button
+function DownloadButton({
+  size = "large",
+  microcopy = "Available now on the App Store",
 }: {
-  buttonText?: string;
+  size?: "large" | "small";
   microcopy?: string;
-  inputId?: string;
 }) {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("Oops! Something went wrong, please try again");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    setStatus("loading");
-
-    try {
-      const res = await fetch(LOOPS_FORM_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `userGroup=&mailingLists=${LOOPS_MAILING_LIST}&email=${encodeURIComponent(email)}`,
-      });
-
-      if (res.ok) {
-        setStatus("success");
-      } else {
-        const data = await res.json().catch(() => ({}));
-        setErrorMsg(data.message || res.statusText || "Something went wrong");
-        setStatus("error");
-      }
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "";
-      if (msg) {
-        setErrorMsg(msg);
-      }
-      setStatus("error");
-    }
-  };
-
-  if (status === "success") {
-    return (
-      <p style={{ color: C.forest, fontFamily: serif }} className="text-lg font-semibold italic py-4 text-center">
-        ✓ You&apos;re on the list. We&apos;ll be in touch.
-      </p>
-    );
-  }
-
-  if (status === "error") {
-    return (
-      <div className="text-center py-2">
-        <p style={{ color: "#b91c1c", fontFamily: sans }} className="text-sm mb-3">{errorMsg}</p>
-        <button
-          onClick={() => { setStatus("idle"); setEmail(""); }}
-          style={{ color: C.muted, fontFamily: sans }}
-          className="text-sm underline cursor-pointer bg-transparent border-none"
-        >
-          ← Back
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div
-          style={{ backgroundColor: "white", border: "1.5px solid #ddd5c8" }}
-          className="flex items-center rounded-xl shadow-sm overflow-hidden"
-        >
-          <input
-            id={inputId}
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email address"
-            required
-            disabled={status === "loading"}
-            style={{ color: C.dark, fontFamily: sans, outline: "none" }}
-            className="flex-1 px-5 py-4 text-base placeholder:text-gray-400 bg-transparent min-w-0"
-          />
-          <button
-            type="submit"
-            disabled={status === "loading"}
-            style={{ backgroundColor: C.forest, color: "white", fontFamily: sans }}
-            className="px-6 py-3 m-1.5 rounded-lg font-semibold text-sm uppercase tracking-widest whitespace-nowrap hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer flex-shrink-0 disabled:opacity-70"
-          >
-            {status === "loading" ? "Please wait..." : buttonText}
-          </button>
-        </div>
-      </form>
+    <div className="flex flex-col items-center">
+      <a
+        href={APP_STORE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ backgroundColor: C.forest, color: "white", fontFamily: sans }}
+        className={`${size === "large" ? "px-10 py-4 text-base" : "px-8 py-3.5 text-sm"} rounded-full font-semibold uppercase tracking-widest whitespace-nowrap hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-3 no-underline`}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        Download Now
+      </a>
       <p style={{ color: C.muted, fontFamily: sans }} className="text-xs text-center mt-3">
         {microcopy}
       </p>
     </div>
-  );
-}
-
-// Section 6 pill-style form
-function EmailForm({ buttonText }: { buttonText: string }) {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) setSubmitted(true);
-  };
-
-  if (submitted) {
-    return (
-      <p style={{ color: C.forest, fontFamily: serif }} className="text-lg font-semibold italic py-4 text-center">
-        ✓ You&apos;re on the list. We&apos;ll be in touch.
-      </p>
-    );
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full max-w-md">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="your@email.com"
-        required
-        style={{ borderColor: C.forest, color: C.dark, backgroundColor: "white", fontFamily: sans, outline: "none" }}
-        className="flex-1 px-5 py-3.5 rounded-full border-2 text-base placeholder:text-gray-400"
-      />
-      <button
-        type="submit"
-        style={{ backgroundColor: C.forest, color: "white", fontFamily: sans }}
-        className="px-7 py-3.5 rounded-full font-semibold text-base whitespace-nowrap hover:opacity-90 active:scale-95 transition-all cursor-pointer"
-      >
-        {buttonText}
-      </button>
-    </form>
   );
 }
 
@@ -229,18 +116,19 @@ export default function Home() {
         {/* Navbar */}
         <nav className="relative z-10 flex items-center justify-between px-5 md:px-12 py-5 w-full">
           <DreamtLogo />
-          <button
-            onClick={() => document.getElementById("hero-email")?.focus()}
+          <a
+            href={APP_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
-              border: "1.5px solid rgba(26,26,26,0.35)",
-              color: C.dark,
+              backgroundColor: C.forest,
+              color: "white",
               fontFamily: sans,
-              backgroundColor: "transparent",
             }}
-            className="px-5 py-2 rounded-full text-sm hover:bg-black/5 transition-colors cursor-pointer"
+            className="px-5 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity cursor-pointer no-underline"
           >
-            Join waitlist
-          </button>
+            Download Now
+          </a>
         </nav>
 
         {/* Hero text */}
@@ -293,9 +181,9 @@ export default function Home() {
             We change that.
           </p>
 
-          {/* Wide email form */}
+          {/* Download button */}
           <div className="w-full max-w-lg">
-            <WideEmailForm inputId="hero-email" />
+            <DownloadButton microcopy="7-day free trial · Cancel anytime" />
           </div>
         </div>
 
@@ -590,18 +478,23 @@ export default function Home() {
               {" "}
               <strong>It&apos;s every morning.</strong>
             </p>
-            <button
-              onClick={() => document.getElementById("hero-email")?.focus()}
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 backgroundColor: C.forest,
                 color: "white",
                 fontFamily: sans,
                 letterSpacing: "0.13em",
               }}
-              className="px-9 py-4 rounded-full text-sm font-semibold uppercase hover:opacity-90 transition-opacity cursor-pointer"
+              className="px-9 py-4 rounded-full text-sm font-semibold uppercase hover:opacity-90 transition-opacity cursor-pointer no-underline inline-flex items-center gap-3"
             >
-              Join the Waitlist
-            </button>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              Download Now
+            </a>
           </div>
 
         </div>
@@ -845,15 +738,12 @@ export default function Home() {
             style={{ fontFamily: serif, color: C.muted, fontStyle: "italic" }}
             className="text-lg md:text-xl mb-10 leading-relaxed"
           >
-            Be the first to know when we launch. Your dream life is closer than you think.
+            Start your journey today. Your dream life is closer than you think.
           </p>
 
-          {/* Wide email form */}
+          {/* Download button */}
           <div className="mb-4">
-            <WideEmailForm
-              buttonText="I'M READY"
-              microcopy="7-day free trial · Cancel anytime"
-            />
+            <DownloadButton microcopy="7-day free trial · Cancel anytime" />
           </div>
 
           <div className="mt-10 mb-20" />
