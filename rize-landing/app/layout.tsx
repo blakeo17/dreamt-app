@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Instrument_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -15,9 +16,9 @@ const instrumentSans = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "RiZe — Become who you said you'd become",
+  title: "RIZE — No More Excuses. Lock In.",
   description:
-    "RiZe is where our generation locks in. One meaningful action a day. Real evidence you're changing. Built with Maxwell Rhoe. Join the waitlist.",
+    "RIZE is where our generation locks in. One meaningful action a day. Real evidence you're changing. Join the waitlist.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -26,7 +27,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${fraunces.variable} ${instrumentSans.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

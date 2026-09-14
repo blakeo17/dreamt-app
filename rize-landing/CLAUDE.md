@@ -1,8 +1,8 @@
-# RiZe Landing Page
+# RIZE Landing Page
 
 ## Project Overview
 
-RiZe is an upcoming iOS app built with creator Maxwell Rhoe for his Gen-Z audience.
+RIZE is an upcoming iOS app built with creator Maxwell Rhoe for his Gen-Z audience.
 
 **Concept:** You define who you're becoming, then prove it with one meaningful action every day — a Daily Proof. The community does proofs together.
 

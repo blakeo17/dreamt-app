@@ -1,6 +1,60 @@
 "use client";
 
-import { useEffect, useState, FormEvent } from "react";
+import { useEffect, useState, useRef, FormEvent } from "react";
+import Image from "next/image";
+
+function useReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, revealed };
+}
+
+function Step({ num, title, desc, img, alt }: { num: string; title: string; desc: string; img: string; alt: string }) {
+  const { ref, revealed } = useReveal();
+  return (
+    <div ref={ref} className={`step ${revealed ? "revealed" : ""}`}>
+      <div className="step-header">
+        <span className="n">{num}</span>
+        <h3>{title}</h3>
+      </div>
+      <p>{desc}</p>
+      <div className="step-img">
+        <Image src={img} alt={alt} width={280} height={560} />
+      </div>
+    </div>
+  );
+}
+
+function HowSection() {
+  const { ref, revealed } = useReveal();
+  return (
+    <section ref={ref} className={`how wrap ${revealed ? "revealed" : ""}`}>
+      <h2>How RIZE works</h2>
+      <Step num="1." title="Decide who you're becoming." desc="Visualize the ideal version of yourself." img="/step1.png" alt="Decide who you're becoming" />
+      <Step num="2." title="Take action everyday." desc="Each proof takes you 1% closer to becoming who you want to be." img="/step2.png" alt="Take action everyday" />
+      <Step num="3." title="Rise up together." desc="Post your wins, keep yourself accountable, grow with your generation." img="/step3.png" alt="Rise up together" />
+    </section>
+  );
+}
 
 function WaitlistForm({ id }: { id: string }) {
   const [email, setEmail] = useState("");
@@ -11,8 +65,9 @@ function WaitlistForm({ id }: { id: string }) {
     e.preventDefault();
     setErrorMsg("");
 
-    if (!email || !email.includes("@") || email.indexOf(".") < 3) {
-      setErrorMsg("That didn't go through — check the email and try again.");
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail || !trimmedEmail.includes("@")) {
+      setErrorMsg("Please enter a valid email.");
       setStatus("error");
       return;
     }
@@ -20,20 +75,24 @@ function WaitlistForm({ id }: { id: string }) {
     setStatus("submitting");
 
     try {
-      const res = await fetch("YOUR_FORM_ENDPOINT_HERE", {
+      const res = await fetch("https://app.loops.so/api/newsletter-form/cmn85yiux0kp10i0qxkxjaca3", {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(e.target as HTMLFormElement),
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `email=${encodeURIComponent(trimmedEmail)}`,
       });
 
       if (res.ok) {
         setStatus("success");
+        setEmail("");
       } else {
-        throw new Error("bad response");
+        setStatus("error");
+        setErrorMsg("Something went wrong — try again.");
       }
     } catch {
       setStatus("error");
-      setErrorMsg("Something broke on our end — try once more.");
+      setErrorMsg("Something went wrong — try again.");
     }
   }
 
@@ -41,7 +100,7 @@ function WaitlistForm({ id }: { id: string }) {
     return (
       <div className="success show">
         <div className="big">You&apos;re in.</div>
-        <p>You&apos;ll be first through the door when RiZe opens. Until then — keep your word.</p>
+        <p>You&apos;ll be first through the door when RIZE opens.</p>
       </div>
     );
   }
@@ -79,28 +138,27 @@ export default function Home() {
   return (
     <div className={loaded ? "loaded" : ""}>
       <header>
-        <div className="wordmark">
-          Ri<span>Z</span>e
+        <div className="wrap header-inner">
+          <Image src="/logo.png" alt="RiZe" width={900} height={411} className="logo" priority />
         </div>
       </header>
 
       <main>
         <section className="hero wrap">
           <div className="oldself" aria-hidden="true">
-            <i>Inconsistent.</i>
-            <i>Distracted.</i>
-            <i>Overthinking.</i>
+            <i>Chud 🥀</i>
+            <i>Loser 💔</i>
+            <i>Bum 😭</i>
           </div>
 
           <h1>
-            Become who you
+            No More Excuses…
             <br />
-            said you&apos;d become.
+            <span className="h1-underline">Lock The F--K In</span>
           </h1>
 
           <p className="lede">
-            One meaningful action a day. Real evidence you&apos;re changing.{" "}
-            <b>A whole generation locking in together.</b>
+            It&apos;s <em>not</em> over. Join the rest of Gen Z and rise up together.
           </p>
 
           <div className="signup">
@@ -109,56 +167,21 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="how wrap">
-          <h2>How RiZe works</h2>
-
-          <div className="step">
-            <div className="n">1</div>
-            <div>
-              <h3>Decide who you&apos;re proving you are today</h3>
-              <p>
-                <em>Disciplined. Focused. Confident.</em> Pick the identity you&apos;re building — not
-                another goal.
-              </p>
-            </div>
-          </div>
-
-          <div className="step">
-            <div className="n">2</div>
-            <div>
-              <h3>Do one real thing that proves it</h3>
-              <p>One meaningful action. Your word is active until midnight. Then you prove it.</p>
-            </div>
-          </div>
-
-          <div className="step">
-            <div className="n">3</div>
-            <div>
-              <h3>Watch the evidence stack up</h3>
-              <p>
-                Every proof is a receipt of who you&apos;re becoming — and you&apos;ll see everyone
-                else proving it with you, every single day.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="max wrap">
-          <p className="line">Everyone says they&apos;re locking in. This is where you prove it.</p>
-          <p className="who">
-            Built with <b>Maxwell Rhoe</b>, for the generation that&apos;s done just talking about it.
-          </p>
-        </section>
+        <HowSection />
 
         <section className="bottom wrap">
-          <h2>Your word starts here.</h2>
+          <p className="cta-text">Join the community now.</p>
           <div className="signup">
             <WaitlistForm id="waitlist-form-2" />
           </div>
         </section>
       </main>
 
-      <footer className="wrap">© 2026 RiZe</footer>
+      <footer className="wrap">
+        <span>RiZe · © 2026 Newbury AI LLC</span>
+        <a href="/support" className="footer-link">Support</a>
+        <a href="/privacy" className="footer-link">Privacy</a>
+      </footer>
     </div>
   );
 }
