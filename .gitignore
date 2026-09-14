@@ -39,3 +39,25 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ---------------------------------------------------------------------------
+# Safety guard: this repo's root is /Users/blake, the whole home directory.
+# Without this, `git add -A` would stage ~/.ssh, ~/.zsh_history, ~/Documents,
+# and every unrelated project on the machine. Ignore everything at the top
+# level by default, then re-include only the paths this repo actually owns.
+# Adding a new top-level project folder? Add a matching `!/name/` line.
+# ---------------------------------------------------------------------------
+/*
+!/.gitignore
+!/README.md
+!/app/
+!/public/
+!/manifest-app/
+!/rize-landing/
+!/eslint.config.mjs
+!/next.config.ts
+!/postcss.config.mjs
+!/tsconfig.json
+!/vercel.json
+!/package.json
+!/package-lock.json
